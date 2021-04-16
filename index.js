@@ -46,6 +46,43 @@ app.get("/api/items", (req, res) => {
     )    
 })
 
+// get item by name
+app.get("/api/items/:item_name", (req, res) => {
+    console.log(`Searching for: ${req.params.item_name}`)
+
+    Item.find({name:req.params.item_name}).exec()
+        .then(
+            (result) => {
+                console.log(`Result from database: `)
+                console.log(result)
+                if (result === null) {
+                    console.log("record not found")
+                    const msg = {
+                        statusCode:404,
+                        msg: "Record not found"
+                    }
+                    res.status(404).send(msg)
+                }
+                else {
+                    console.log("Item found")                    
+                    res.status(200).send(result)
+                }                
+            }
+        ).catch(
+            (err) => {
+                console.log(`Error`)
+                console.log(err)
+                const msg = {
+                    statusCode:500,
+                    msg: "Error when getting item by name from database."
+                }
+                res.status(500).send(msg)
+
+            }
+        )  
+})
+
+//get item(s) by rarity
 app.get("/api/items/:irarity", (req,res) => {
     // 1. Determine which items the user wants
     // - by rarity 
@@ -86,19 +123,14 @@ app.get("/api/items/:irarity", (req,res) => {
         )
 })
 
-
-
 // INSERT 
 app.post("/api/items", (req, res) => {
 
     // 1. what did the client send us
     // - what data does the client want us insert into the database
-    console.log("I received this from the client:")
+    console.log("User Given:")
     console.log(req.body)
     
-    // 2. Take that information and CREATE someone in your database!
-    // - mongoose
-
     Item.create(req.body).then(
         (result) => {
             //javascript
@@ -113,17 +145,53 @@ app.post("/api/items", (req, res) => {
             console.log(err)
             const msg = {
                 statusCode:500,
-                msg: "Error when getting items from database."
+                msg: "Error when creating item from database."
             }
             res.status(500).send(msg)
         }
     )    
 })
 
+// 4. update
+app.put("/api/items/:item_id", (req,res) => {
+    // 1. get id from the URL params
+    const itemIdFromUser = parseInt(req.params.item_id)
+    // 2. get the body from the request
+    const itemData = req.body
+
+    console.log(`API endpoint will be available in a future update`)
+
+    res.status(501).send({"msg":`API endpoint will be available in a future update`})
+})
 
 
-
-
+// delete
+app.delete("/api/items/:item_name", (req,res) => {
+    // 1. Get the item Name    
+    Item.findOneAndDelete({name:req.params.item_name}).exec().then(
+        (deletedItem) => {
+            if (deletedItem === null) {           
+                console.log("Could not find a item to delete")
+                res.status(404).send("Could not find a item to delete")
+            }
+            else {
+                console.log(deletedItem)
+                res.status(201).send("deletion success!")
+            }
+        
+        }
+    ).catch(
+        (err) => {
+            console.log(`Error`)
+            console.log(err)
+            const msg = {
+                statusCode:500,
+                msg: "Error when deleting item from database."
+            }
+            res.status(500).send(msg)
+        }
+    )
+})
 
 
 
