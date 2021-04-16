@@ -169,8 +169,11 @@ app.put("/api/items/:item_id", (req,res) => {
     const itemData = req.body
 
     console.log(`Update Item API endpoint will be available in a future update`)
-
-    res.status(501).send({"msg":`Update Item API endpoint will be available in a future update`})
+    const msg = {
+        statusCode:501,
+        msg: "Update Item API endpoint will be available in a future update"
+    }
+    res.status(501).send(msg)
 })
 
 
@@ -188,6 +191,7 @@ app.delete("/api/items/:item_name", (req,res) => {
                 res.status(404).send(msg)
             }
             else {
+                console.log("Deletion success!")
                 console.log(deletedItem)
                 const msg = {
                     statusCode:201,
