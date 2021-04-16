@@ -42,7 +42,11 @@ app.get("/api/items", (req, res) => {
     ).catch(
         (err) => {
             console.log(error)
-            res.status(500).send("Internal Server Error when getting all Items from database.")
+            const msg = {
+                statusCode:500,
+                msg: "Internal Server Error when getting all Items from database."
+            }
+            res.status(500).send(msg)
         }
     )    
 })
@@ -105,7 +109,7 @@ app.get("/api/items/:irarity", (req,res) => {
                     res.status(404).send(msg)
                 }
                 else {
-                    console.log("Item(s) found")                    
+                    console.log("Item(s) found")
                     res.status(200).send(results)
                 }
                 
@@ -138,7 +142,11 @@ app.post("/api/items", (req, res) => {
             console.log("Create success!")
             console.log(result)
             // express
-            res.status(201).send("Insert success!")
+            const msg = {
+                statusCode:201,
+                msg: "Insert success!"
+            }
+            res.status(201).send(msg)
         }
     ).catch(
         (err) => {
@@ -160,9 +168,9 @@ app.put("/api/items/:item_id", (req,res) => {
     // 2. get the body from the request
     const itemData = req.body
 
-    console.log(`API endpoint will be available in a future update`)
+    console.log(`Update Item API endpoint will be available in a future update`)
 
-    res.status(501).send({"msg":`API endpoint will be available in a future update`})
+    res.status(501).send({"msg":`Update Item API endpoint will be available in a future update`})
 })
 
 
@@ -173,11 +181,19 @@ app.delete("/api/items/:item_name", (req,res) => {
         (deletedItem) => {
             if (deletedItem === null) {           
                 console.log("Could not find a item to delete")
-                res.status(404).send("Could not find a item to delete")
+                const msg = {
+                    statusCode:404,
+                    msg: "Could not find a item to delete"
+                }
+                res.status(404).send(msg)
             }
             else {
                 console.log(deletedItem)
-                res.status(201).send("deletion success!")
+                const msg = {
+                    statusCode:201,
+                    msg: "deletion success!"
+                }
+                res.status(201).send(msg)
             }
         
         }
@@ -195,10 +211,12 @@ app.delete("/api/items/:item_name", (req,res) => {
 })
 
 app.get("/", (req, res) => {
-    // JSON , XML
-    // All data sent to the API endpoint, are sent in JSON format
-    // All replies sent by the server are sent in JSON Format    
-    res.status(418).send({"name":"testttta3", "age":99});
+
+    const msg = {
+        statusCode:501,
+        msg: "Not Implemented Invalid Request"
+    }   
+    res.status(501).send(msg);
 });
 
 app.use(function(req, res) {
