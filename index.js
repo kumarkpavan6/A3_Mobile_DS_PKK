@@ -201,7 +201,18 @@ app.get("/", (req, res) => {
     res.status(418).send({"name":"testttta3", "age":99});
 });
 
-
+app.use(function(req, res) {
+    // Invalid request
+          res.json({
+            error: {
+              'name':'Error',
+              'status':501,
+              'message':'Invalid Request, Not Implemented',
+              'statusCode':501
+            },
+             message: 'Invalid Request, Not Implemented'
+          });
+    });
 
 
 // ----------------------------------
