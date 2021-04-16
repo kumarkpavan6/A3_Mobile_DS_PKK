@@ -210,25 +210,25 @@ app.delete("/api/items/:item_name", (req,res) => {
     )
 })
 
-app.get("/", (req, res) => {
+// app.get("/", (req, res) => {
 
-    const msg = {
-        statusCode:501,
-        msg: "Not Implemented Invalid Request"
-    }   
-    res.status(501).send(msg);
-});
+//     const msg = {
+//         statusCode:501,
+//         msg: "Not Implemented Invalid Request"
+//     }   
+//     res.status(501).send(msg);
+// });
 
 app.use(function(req, res) {
     // Invalid request
           res.json({
             error: {
               'name':'Error',
-              'status':501,
-              'message':'Invalid Request, Not Implemented',
-              'statusCode':501
+              'status':404,
+              'message':'Not Found',
+              'statusCode':404
             },
-             message: 'Invalid Request, Not Implemented'
+             message: 'Not Found'
           });
     });
 
