@@ -52,7 +52,7 @@ app.get("/api/items", (req, res) => {
 })
 
 // get item by name
-app.get("/api/items/:item_name", (req, res) => {
+app.get("/api/items/getByName/:item_name", (req, res) => {
     console.log(`Searching for: ${req.params.item_name}`)
 
     Item.find({name:req.params.item_name}).exec()
