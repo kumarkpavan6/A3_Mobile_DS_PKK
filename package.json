@@ -1,0 +1,22 @@
+{
+  "name": "a3_mobile_ds_pkk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kumarkpavan6/A3_Mobile_DS_PKK.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kumarkpavan6/A3_Mobile_DS_PKK/issues"
+  },
+  "homepage": "https://github.com/kumarkpavan6/A3_Mobile_DS_PKK#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
