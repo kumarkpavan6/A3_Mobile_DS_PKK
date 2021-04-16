@@ -25,6 +25,7 @@ const Item = mongoose.model("items_tables", ItemSchema)
 const express = require("express");
 const app = express();
 app.use(express.json())
+
 const HTTP_PORT = process.env.PORT || 8080;
 
 // ----------------------------------
@@ -193,7 +194,12 @@ app.delete("/api/items/:item_name", (req,res) => {
     )
 })
 
-
+app.get("/", (req, res) => {
+    // JSON , XML
+    // All data sent to the API endpoint, are sent in JSON format
+    // All replies sent by the server are sent in JSON Format    
+    res.status(418).send({"name":"testttta3", "age":99});
+});
 
 
 
